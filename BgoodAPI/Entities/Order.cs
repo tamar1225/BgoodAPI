@@ -2,7 +2,7 @@
 {
     public class Order
     {
-        public int orderNUm { get; set; }
+        public int orderNum { get; set; }
         public DateOnly orderDate { get; set; }
         public Customer customer { get; set; }
         public double totalPrice { get; set; }
