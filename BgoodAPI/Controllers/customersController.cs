@@ -58,7 +58,7 @@ namespace BgoodAPI.Controllers
 
         }
 
-        // DELETE api/<productsController>/5
+        // PUT api/<productsController>/5
         [HttpPut("{id}/status")]
         public ActionResult Delete(int id)
         {

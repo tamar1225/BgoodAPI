@@ -9,28 +9,27 @@ namespace BgoodAPI.Controllers
     [ApiController]
     public class ordersController : ControllerBase
     {
-        // GET: api/<ordersController>
-        private static List<Order> customers = new List<Order>{
-         new Order {orderNum=325, Name="TamarMalik", Address="tzvi 17", IsMember=true},
-
-
-
+        static Customer cust1 = new Customer { ID = 326, Name = "MorL", Address = "sigim 1", IsMember = true };
+        static Customer cust2 = new Customer { ID = 325, Name = "TamarMalik", Address = "tzvi 17", IsMember = true };
+        private static List<Order> orders = new List<Order>{
+         new Order {orderNum=1010, customer=cust1, orderDate=new DateOnly(2023, 12, 31), status="recived", totalPrice=400},
+         new Order {orderNum=1022, customer=cust2, orderDate=new DateOnly(2023, 12, 26), status="sent", totalPrice=330},
     };
 
         // GET: api/<ordersController>
         [HttpGet]
-        public IEnumerable<Customer> Get()
+        public IEnumerable<Order> Get()
         {
-            return customers;
+            return orders;
         }
 
         // GET api/<ordersController>/5
-        [HttpGet("{id}")]
-        public ActionResult Get(int id)
+        [HttpGet("{ordNum}")]
+        public ActionResult Get(int ordNum)
         {
-            foreach (var item in customers)
+            foreach (var item in orders)
             {
-                if (item.ID == id)
+                if (item.orderNum == ordNum)
                     return Ok(item);
             }
             return NotFound();
@@ -38,35 +37,34 @@ namespace BgoodAPI.Controllers
 
         // POST api/<ordersController>
         [HttpPost]
-        public void Post([FromBody] Customer newCustomer)
+        public void Post([FromBody] Order newOrder)
         {
-            newCustomer.IsMember = true;
-            customers.Add(newCustomer);
+            orders.Add(newOrder);
         }
 
         // PUT api/<ordersController>/5
-        [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Customer updateCust)
+        [HttpPut("{ordNum}")]
+        public ActionResult Put(int ordNum ,[FromBody] string newStatus)
         {
-            int index = customers.FindIndex((c) => c.ID == id);
+            int index = orders.FindIndex((o) => o.orderNum == ordNum);
             if (index != -1)
             {
-                customers[index] = updateCust;
-                return Ok(customers[index]);
+                orders[index].status = newStatus;
+                return Ok(orders[index]);
             }
             return NotFound();
 
         }
 
         // DELETE api/<ordersController>/5
-        [HttpPut("{id}/status")]
-        public ActionResult Delete(int id)
+        [HttpDelete("{ordNum}")]
+        public ActionResult Delete(int ordNum)
         {
-            int index = customers.FindIndex((c) => c.ID == id);
+            int index = orders.FindIndex((o) => o.orderNum == ordNum);
             if (index != -1)
             {
-                customers[index].IsMember = false;
-                return Ok(customers[index]);
+                orders.RemoveAt(index);
+                return Ok();
             }
 
             return NotFound();

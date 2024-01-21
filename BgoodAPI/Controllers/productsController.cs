@@ -66,7 +66,6 @@ namespace BgoodAPI.Controllers
                 products.RemoveAt(index);
                 return Ok();
             }
-                
             return NotFound();
         }
     }
