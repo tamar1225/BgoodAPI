@@ -1,4 +1,5 @@
-﻿using BgoodAPI.Entities;
+﻿using Bgood.Service;
+using BgoodAPI.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -10,17 +11,18 @@ namespace BgoodAPI.Controllers
     [ApiController]
     public class productsController : ControllerBase
     {
-        private static List<Product> products = new List<Product>{
-         new Product {prodID=1, productName="Tshirt", Category="children", price=100},
-         new Product {prodID=2, productName="shoes", Category="children", price=150},
-         new Product {prodID=3, productName="coat", Category="children", price=250}
-    };
+        private readonly ProductService _productService;
+        
+        public productsController(ProductService productService)
+        {
+            _productService = productService;
+        }
 
         // GET: api/<prductsController>
-        [HttpGet]
+     /*   [HttpGet]
         public IEnumerable<Product> Get()
         {
-            return products;
+            return _productService.GetAll();
         }
 
         // GET api/<productsController>/5
@@ -29,7 +31,7 @@ namespace BgoodAPI.Controllers
         {
             foreach (var item in products)
             {
-                if (item.prodID == id)
+                if (item.ProdID == id)
                     return Ok(item);
             }
             return NotFound();
@@ -46,7 +48,7 @@ namespace BgoodAPI.Controllers
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] double newPrice)
         {
-            int index = products.FindIndex((p) => p.prodID == id);
+            int index = products.FindIndex((p) => p.ProdID == id);
             if (index != -1)
             {
                 products[index].price = newPrice;
@@ -60,7 +62,7 @@ namespace BgoodAPI.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            int index = products.FindIndex((p) => p.prodID == id);
+            int index = products.FindIndex((p) => p.ProdID == id);
             if (index != -1)
             {
                 products.RemoveAt(index);
@@ -68,5 +70,6 @@ namespace BgoodAPI.Controllers
             }
             return NotFound();
         }
+     */
     }
 }
