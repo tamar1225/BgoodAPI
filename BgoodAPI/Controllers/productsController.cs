@@ -9,11 +9,11 @@ namespace BgoodAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class productsController : ControllerBase
+    public class ProductsController : ControllerBase
     {
         private readonly ProductService _productService;
         
-        public productsController(ProductService productService)
+        public ProductsController(ProductService productService)
         {
             _productService = productService;
         }

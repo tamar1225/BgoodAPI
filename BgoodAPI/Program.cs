@@ -21,9 +21,9 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddScoped<ProductService>();
-builder.Services.AddScoped<IProductRepository, ProductRepository>;
-builder.Services.AddSingleton<DataContext>;
+builder.Services.AddScoped<ProductService>()();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddSingleton<DataContext>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
