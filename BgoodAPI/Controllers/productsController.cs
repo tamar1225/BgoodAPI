@@ -19,7 +19,7 @@ namespace BgoodAPI.Controllers
         }
 
         // GET: api/<prductsController>
-     /*   [HttpGet]
+      [HttpGet]
         public IEnumerable<Product> Get()
         {
             return _productService.GetAll();
@@ -27,17 +27,18 @@ namespace BgoodAPI.Controllers
 
         // GET api/<productsController>/5
         [HttpGet("{id}")]
-        public ActionResult Get(int id)
+        public Product Get(int id)
         {
-            foreach (var item in products)
-            {
-                if (item.ProdID == id)
-                    return Ok(item);
-            }
-            return NotFound();
+            /*  foreach (var item in _productService.GetAll())
+              {
+                  if (item.ProdID == id)
+                      return Ok(item);
+              }
+              return NotFound();*/
+            return _productService.GetProduct(id); 
         }
 
-        // POST api/<priductsController>
+     /*     // POST api/<priductsController>
         [HttpPost]
         public void Post([FromBody] Product newProd)
         {

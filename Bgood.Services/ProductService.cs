@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Bgood.Service
 {
@@ -16,9 +17,19 @@ namespace Bgood.Service
         {
             _prodRepository=productRepository;
         }
+
         public List<Product> GetAll()
         {
             return _prodRepository.GetList();
+        }
+        public Product GetProduct(int id)
+        {
+            foreach (var item in _prodRepository.GetList())
+            {
+                if (item.ProdID == id)
+                    return item;
+            }
+            return null;
         }
     }
 }

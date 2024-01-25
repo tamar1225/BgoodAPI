@@ -19,5 +19,6 @@ namespace Bgood.Data.Repositories
         {
             return _context.Products;
         }
+        
     }
 }

@@ -1,5 +1,7 @@
 
 using Bgood.Core.Repositories;
+using Bgood.Data;
+using Bgood.Data.Repositories;
 using Bgood.Service;
 
 
@@ -21,7 +23,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddScoped<ProductService>()();
+builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddSingleton<DataContext>();
 var app = builder.Build();
