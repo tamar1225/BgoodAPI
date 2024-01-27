@@ -5,12 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-namespace Bgood.Core.Repositories
+namespace Bgood.Service
 {
-    public interface IProductRepository
+    public interface ICustomerRepository
     {
-        List<Product> GetList();
-
+        List<Customer> GetList();
     }
 }

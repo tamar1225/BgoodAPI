@@ -1,4 +1,5 @@
-﻿using Bgood.Service;
+﻿using Bgood.Core.Services;
+using Bgood.Service;
 using BgoodAPI.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -11,9 +12,9 @@ namespace BgoodAPI.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly ProductService _productService;
+        private readonly IProductService _productService;
         
-        public ProductsController(ProductService productService)
+        public ProductsController(IProductService productService)
         {
             _productService = productService;
         }
@@ -26,51 +27,50 @@ namespace BgoodAPI.Controllers
         }
 
         // GET api/<productsController>/5
-        [HttpGet("{id}")]
-        public Product Get(int id)
-        {
-            /*  foreach (var item in _productService.GetAll())
-              {
-                  if (item.ProdID == id)
-                      return Ok(item);
-              }
-              return NotFound();*/
-            return _productService.GetProduct(id); 
-        }
-
-     /*     // POST api/<priductsController>
-        [HttpPost]
-        public void Post([FromBody] Product newProd)
-        {
-            products.Add(newProd);
-        }
-
-        // PUT api/<productsController>/5
-        [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] double newPrice)
-        {
-            int index = products.FindIndex((p) => p.ProdID == id);
-            if (index != -1)
+          [HttpGet("{id}")]
+           public ActionResult Get(int id)
+          {          
+            Product prod = _productService.GetProduct(id);
+            if (prod != null)
             {
-                products[index].price = newPrice;
-                return Ok(products[index]);
-            }
+                return Ok(prod);
+            } 
             return NotFound();
+          }
 
-        }
+        /*     // POST api/<priductsController>
+           [HttpPost]
+           public void Post([FromBody] Product newProd)
+           {
+               products.Add(newProd);
+           }
 
-        // DELETE api/<productsController>/5
-        [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
-        {
-            int index = products.FindIndex((p) => p.ProdID == id);
-            if (index != -1)
-            {
-                products.RemoveAt(index);
-                return Ok();
-            }
-            return NotFound();
-        }
-     */
+           // PUT api/<productsController>/5
+           [HttpPut("{id}")]
+           public ActionResult Put(int id, [FromBody] double newPrice)
+           {
+               int index = products.FindIndex((p) => p.ProdID == id);
+               if (index != -1)
+               {
+                   products[index].price = newPrice;
+                   return Ok(products[index]);
+               }
+               return NotFound();
+
+           }
+
+           // DELETE api/<productsController>/5
+           [HttpDelete("{id}")]
+           public ActionResult Delete(int id)
+           {
+               int index = products.FindIndex((p) => p.ProdID == id);
+               if (index != -1)
+               {
+                   products.RemoveAt(index);
+                   return Ok();
+               }
+               return NotFound();
+           }
+        */
     }
 }

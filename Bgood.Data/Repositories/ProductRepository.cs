@@ -11,9 +11,9 @@ namespace Bgood.Data.Repositories
     public class ProductRepository:IProductRepository
     {
         private readonly DataContext _context;
-        public ProductRepository(DataContext context)
+        public ProductRepository(DataContext datacontext)
         {
-            _context = context;
+            _context = datacontext;
         }
         public List<Product> GetList()
         {

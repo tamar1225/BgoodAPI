@@ -1,4 +1,5 @@
-﻿using BgoodAPI.Entities;
+﻿using Bgood.Core.Services;
+using BgoodAPI.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -9,22 +10,21 @@ namespace BgoodAPI.Controllers
     [ApiController]
     public class ordersController : ControllerBase
     {
-        static Customer cust1 = new Customer { ID = 326, Name = "MorL", Address = "sigim 1", IsMember = true };
-        static Customer cust2 = new Customer { ID = 325, Name = "TamarMalik", Address = "tzvi 17", IsMember = true };
-        private static List<Order> orders = new List<Order>{
-         new Order {orderNum=1010, customer=cust1, orderDate=new DateOnly(2023, 12, 31), status="recived", totalPrice=400},
-         new Order {orderNum=1022, customer=cust2, orderDate=new DateOnly(2023, 12, 26), status="sent", totalPrice=330},
-    };
+       private readonly IOrderService _orders;
+        public ordersController(IOrderService orderService)
+        {
+            _orders = orderService;
+        }
 
         // GET: api/<ordersController>
         [HttpGet]
         public IEnumerable<Order> Get()
         {
-            return orders;
+            return _orders.GetAll();
         }
 
         // GET api/<ordersController>/5
-        [HttpGet("{ordNum}")]
+        /*[HttpGet("{ordNum}")]
         public ActionResult Get(int ordNum)
         {
             foreach (var item in orders)
@@ -68,6 +68,6 @@ namespace BgoodAPI.Controllers
             }
 
             return NotFound();
-        }
+        }*/
     }
     }

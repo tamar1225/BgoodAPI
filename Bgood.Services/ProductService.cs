@@ -1,5 +1,5 @@
 ﻿using Bgood.Core.Repositories;
-
+using Bgood.Core.Services;
 using BgoodAPI.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Bgood.Service
 {
-    public class ProductService
+    public class ProductService:IProductService
     {
         private readonly IProductRepository _prodRepository;
         public ProductService(IProductRepository productRepository)

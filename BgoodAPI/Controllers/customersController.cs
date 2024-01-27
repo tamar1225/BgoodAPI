@@ -1,4 +1,5 @@
-﻿using BgoodAPI.Entities;
+﻿using Bgood.Core.Services;
+using BgoodAPI.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -10,21 +11,20 @@ namespace BgoodAPI.Controllers
     [ApiController]
     public class customerController : ControllerBase
     {
-        private static List<Customer> customers = new List<Customer>{
-         new Customer {ID=325, Name="TamarMalik", Address="tzvi 17", IsMember=true},
-         new Customer {ID=326, Name="MorL", Address="sigim 1", IsMember=true},
-         new Customer {ID=327, Name="YamR", Address="dan 20", IsMember=true},
-
-    };
+        private readonly ICustomerService _customers;
+        public customerController(ICustomerService customerService)
+        {
+            _customers = customerService;
+        }
 
         // GET: api/<prductsController>
         [HttpGet]
         public IEnumerable<Customer> Get()
         {
-            return customers;
+            return _customers.GetAll();
         }
 
-        // GET api/<productsController>/5
+       /* // GET api/<productsController>/5
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
@@ -70,6 +70,6 @@ namespace BgoodAPI.Controllers
             }
 
             return NotFound();
-        }
+        }*/
     }
 }
