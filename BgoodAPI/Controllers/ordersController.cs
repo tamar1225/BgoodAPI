@@ -2,6 +2,7 @@
 using BgoodAPI.Entities;
 using Microsoft.AspNetCore.Mvc;
 
+
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace BgoodAPI.Controllers
@@ -23,17 +24,15 @@ namespace BgoodAPI.Controllers
             return _orders.GetAll();
         }
 
+        //- - - - - - להחזיר אקשיין ריזולט או הזמנה? ככה זה בלי הבדיקות
         // GET api/<ordersController>/5
-        /*[HttpGet("{ordNum}")]
-        public ActionResult Get(int ordNum)
+        [HttpGet("{ordNum}")]
+        public Order Get(int ordNum)
         {
-            foreach (var item in orders)
-            {
-                if (item.orderNum == ordNum)
-                    return Ok(item);
-            }
-            return NotFound();
+           return _orders.GetByID(ordNum);
+           
         }
+        /*
 
         // POST api/<ordersController>
         [HttpPost]
@@ -42,7 +41,7 @@ namespace BgoodAPI.Controllers
             orders.Add(newOrder);
         }
 
-        // PUT api/<ordersController>/5
+        / PUT api/<ordersController>/5
         [HttpPut("{ordNum}")]
         public ActionResult Put(int ordNum ,[FromBody] string newStatus)
         {
