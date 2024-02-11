@@ -7,8 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Bgood.Data.Repositories
-{   
-    public class ProductRepository:IProductRepository
+{
+    public class ProductRepository : IProductRepository
     {
         private readonly DataContext _context;
         public ProductRepository(DataContext datacontext)
@@ -20,7 +20,8 @@ namespace Bgood.Data.Repositories
             return _context.Products.ToList();
         }
 
-        public void Add(Product newProd) {
+        public void Add(Product newProd)
+        {
             _context.Products.Add(newProd);
             _context.SaveChanges();
         }
@@ -36,8 +37,6 @@ namespace Bgood.Data.Repositories
             _context.Remove(_context.Products.ToList()[index]);
             _context.SaveChanges();
         }
-
-
 
     }
 }

@@ -19,15 +19,18 @@ namespace Bgood.Data.Repositories
         {
             return _datacontext.Orders.ToList();
         }
-        public void Add(Order order) {
+        public void Add(Order order) 
+        {
          _datacontext.Orders.Add(order);
          _datacontext.SaveChanges();
         }
-        public void UpdateOrder(int index, String newStatus) {
+        public void UpdateOrder(int index, String newStatus) 
+        {
             _datacontext.Orders.ToList()[index].status = newStatus;
             _datacontext.SaveChanges();
         }
-        public void Delete(int index) {
+        public void Delete(int index) 
+        {
             _datacontext.Remove(_datacontext.Orders.ToList()[index]);
             //_datacontext.Orders.ToList().RemoveAt(index);
             _datacontext.SaveChanges();

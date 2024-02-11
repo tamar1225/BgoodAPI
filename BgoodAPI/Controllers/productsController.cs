@@ -13,47 +13,47 @@ namespace BgoodAPI.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
-        
+
         public ProductsController(IProductService productService)
         {
             _productService = productService;
         }
 
         // GET: api/<prductsController>
-      [HttpGet]
+        [HttpGet]
         public IEnumerable<Product> Get()
         {
             return _productService.GetAll();
         }
 
         // GET api/<productsController>/5
-          [HttpGet("{id}")]
-           public Product Get(int id)
-          {
+        [HttpGet("{id}")]
+        public Product Get(int id)
+        {
             return _productService.GetByID(id);
-          }
+        }
 
-             // POST api/<priductsController>
-           [HttpPost]
-           public void Post([FromBody] Product newProd)
-           {
-              _productService.AddProduct(newProd);
-           }
+        // POST api/<priductsController>
+        [HttpPost]
+        public void Post([FromBody] Product newProd)
+        {
+            _productService.AddProduct(newProd);
+        }
 
-          // PUT api/<productsController>/5
-           [HttpPut("{id}")]
-           public Product Put(int id, [FromBody] double newPrice)
-           {
+        // PUT api/<productsController>/5
+        [HttpPut("{id}")]
+        public Product Put(int id, [FromBody] double newPrice)
+        {
             return _productService.UpdateProduct(id, newPrice);
 
-           }
+        }
 
-          // DELETE api/<productsController>/5
-           [HttpDelete("{id}")]
-           public void Delete(int id)
-           {
-              _productService.DeleteProduct(id);
-           }
-        
+        // DELETE api/<productsController>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            _productService.DeleteProduct(id);
+        }
+
     }
 }
