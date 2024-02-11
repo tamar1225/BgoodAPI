@@ -29,44 +29,32 @@ namespace BgoodAPI.Controllers
         [HttpGet("{ordNum}")]
         public Order Get(int ordNum)
         {
-           return _orders.GetByID(ordNum);
-           
+           return _orders.GetByID(ordNum);          
         }
-        /*
+        
 
-        // POST api/<ordersController>
+        //POST api/<ordersController>
         [HttpPost]
         public void Post([FromBody] Order newOrder)
         {
-            orders.Add(newOrder);
+            _orders.AddOrder(newOrder);
         }
 
-        / PUT api/<ordersController>/5
+        // PUT api/<ordersController>/5
         [HttpPut("{ordNum}")]
-        public ActionResult Put(int ordNum ,[FromBody] string newStatus)
+        public Order Put(int ordNum ,[FromBody] string newStatus)
         {
-            int index = orders.FindIndex((o) => o.orderNum == ordNum);
-            if (index != -1)
-            {
-                orders[index].status = newStatus;
-                return Ok(orders[index]);
-            }
-            return NotFound();
+
+            return _orders.UpdateOrder(ordNum, newStatus);
+            
 
         }
 
         // DELETE api/<ordersController>/5
         [HttpDelete("{ordNum}")]
-        public ActionResult Delete(int ordNum)
+        public void Delete(int ordNum)
         {
-            int index = orders.FindIndex((o) => o.orderNum == ordNum);
-            if (index != -1)
-            {
-                orders.RemoveAt(index);
-                return Ok();
-            }
-
-            return NotFound();
-        }*/
+            _orders.DeleteOrder(ordNum);
+        }
     }
     }

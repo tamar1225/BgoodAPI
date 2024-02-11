@@ -24,52 +24,34 @@ namespace BgoodAPI.Controllers
             return _customers.GetAll();
         }
 
-       /* // GET api/<productsController>/5
+       // GET api/<productsController>/5
         [HttpGet("{id}")]
-        public ActionResult Get(int id)
+        public Customer Get(int ordNum)
         {
-            foreach (var item in customers)
-            {
-                if (item.ID == id)
-                    return Ok(item);
-            }
-            return NotFound();
-        }
+            return _customers.GetByID(ordNum);
+
+        } 
 
         // POST api/<priductsController>
         [HttpPost]
         public void Post([FromBody] Customer newCustomer)
-        {
-            newCustomer.IsMember= true;
-            customers.Add(newCustomer);
+        {        
+            _customers.AddCustomer(newCustomer);
         }
 
         // PUT api/<productsController>/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Customer updateCust)
+        public Customer Put(int id, [FromBody] Customer updateCust)
         {
-            int index = customers.FindIndex((c) => c.ID == id);
-            if (index != -1)
-            {
-                customers[index] = updateCust;
-                return Ok(customers[index]);
-            }
-            return NotFound();
+           return _customers.EditCustomer(id, updateCust);
 
         }
 
         // PUT api/<productsController>/5
         [HttpPut("{id}/status")]
-        public ActionResult Delete(int id)
+        public void Delete(int id)
         {
-            int index = customers.FindIndex((c) => c.ID == id);
-            if (index != -1)
-            {
-                customers[index].IsMember=false;
-                return Ok(customers[index]);
-            }
-
-            return NotFound();
-        }*/
+            _customers.DeleteCustomer(id);
+        }
     }
 }

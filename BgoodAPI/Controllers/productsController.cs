@@ -28,49 +28,32 @@ namespace BgoodAPI.Controllers
 
         // GET api/<productsController>/5
           [HttpGet("{id}")]
-           public ActionResult Get(int id)
-          {          
-            Product prod = _productService.GetProduct(id);
-            if (prod != null)
-            {
-                return Ok(prod);
-            } 
-            return NotFound();
+           public Product Get(int id)
+          {
+            return _productService.GetByID(id);
           }
 
-        /*     // POST api/<priductsController>
+             // POST api/<priductsController>
            [HttpPost]
            public void Post([FromBody] Product newProd)
            {
-               products.Add(newProd);
+              _productService.AddProduct(newProd);
            }
 
-           // PUT api/<productsController>/5
+          // PUT api/<productsController>/5
            [HttpPut("{id}")]
-           public ActionResult Put(int id, [FromBody] double newPrice)
+           public Product Put(int id, [FromBody] double newPrice)
            {
-               int index = products.FindIndex((p) => p.ProdID == id);
-               if (index != -1)
-               {
-                   products[index].price = newPrice;
-                   return Ok(products[index]);
-               }
-               return NotFound();
+            return _productService.UpdateProduct(id, newPrice);
 
            }
 
-           // DELETE api/<productsController>/5
+          // DELETE api/<productsController>/5
            [HttpDelete("{id}")]
-           public ActionResult Delete(int id)
+           public void Delete(int id)
            {
-               int index = products.FindIndex((p) => p.ProdID == id);
-               if (index != -1)
-               {
-                   products.RemoveAt(index);
-                   return Ok();
-               }
-               return NotFound();
+              _productService.DeleteProduct(id);
            }
-        */
+        
     }
 }

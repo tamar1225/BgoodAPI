@@ -10,7 +10,11 @@ namespace Bgood.Core.Repositories
 {
     public interface IProductRepository
     {
-        List<Product> GetList();
+        IEnumerable<Product> GetList();
+        public void Add(Product newProd);
+
+        public void UpdateProduct(int index, double newPrice);
+        public void Delete(int index);
 
     }
 }

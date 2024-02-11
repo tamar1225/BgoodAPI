@@ -20,22 +20,36 @@ namespace Bgood.Service
 
         public List<Order> GetAll()
         {
-            return _orderRepository.GetList();
+            return _orderRepository.GetList().ToList();
         }
 
-        /* public ActionResult GetByID(int ordNum)
-         {
-             Order order = _orderRepository.GetList().Find((o => o.orderNum == ordNum));
-             if (order != null)
-             {
-                 return Ok(order);
-             }
-             return NotFound();
-         }*/
         public Order GetByID(int ordNum)
         {
-            Order order = _orderRepository.GetList().Find((o => o.orderNum == ordNum));
+                                                    //IENUMREABLEלשנות שיתאים ל
+            Order order = GetAll().Find(o => o.orderNum == ordNum);
             return order;
         }
+        public void AddOrder(Order order) {
+            _orderRepository.Add(order);
+        }
+        public Order UpdateOrder(int ordNum, string newStatus)
+        {
+            int index = GetAll().FindIndex((o) => o.orderNum == ordNum);
+            if (index == -1)
+            {       
+                return null;
+            }
+             _orderRepository.UpdateOrder(index, newStatus);
+            return GetAll()[index];
+        }
+        public void DeleteOrder(int ordNum)
+        {
+            int index = GetAll().FindIndex((o) => o.orderNum == ordNum);
+            if (index != -1)
+            {
+                _orderRepository.Delete(index);
+            }
+        }
+            
     }
 }

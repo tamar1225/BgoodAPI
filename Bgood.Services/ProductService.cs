@@ -20,16 +20,36 @@ namespace Bgood.Service
 
         public List<Product> GetAll()
         {
-            return _prodRepository.GetList();
+            return _prodRepository.GetList().ToList();
         }
-        public Product GetProduct(int id)
+      public Product GetByID(int prodId)
         {
-            foreach (var item in _prodRepository.GetList())
-            {
-                if (item.ProdID == id)
-                    return item;
-            }
-            return null;
+            Product product = GetAll().Find(p => p.ProdID == prodId);
+            return product;
         }
+
+        public void AddProduct(Product newProd)
+        {
+            _prodRepository.Add(newProd);
+        }
+        public Product UpdateProduct(int prodId, double newPrice)
+        {
+            int index = GetAll().FindIndex((p) => p.ProdID == prodId);
+            if (index == -1)
+            {
+                return null;
+            }
+            _prodRepository.UpdateProduct(index, newPrice);
+            return GetAll()[index];
+        }
+        public void DeleteProduct(int prodId)
+        {
+            int index = GetAll().FindIndex((p) => p.ProdID == prodId);
+            if (index != -1)
+            {
+                _prodRepository.Delete(index);
+            }
+        }
+
     }
 }

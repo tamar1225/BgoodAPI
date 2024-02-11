@@ -14,9 +14,29 @@ namespace Bgood.Data.Repositories
         public CustomerRepository(DataContext context) {
             _context = context;
         }
-        public List<Customer> GetList()
+        public IEnumerable<Customer> GetList()
         {
-            return _context.Customers;
+            return _context.Customers.ToList();
+        }
+        public void Add(Customer newCustomer)
+        {
+            _context.Customers.Add(newCustomer);
+            _context.SaveChanges();
+        }
+        public void EditCustomer(int index, Customer updateCust)
+        {
+            //למה אי אפשר      :
+            // _context.Customers.ToList()[index] = updateCust;  ????
+            _context.Customers.ToList()[index].Address = updateCust.Address;
+            _context.Customers.ToList()[index].Name = updateCust.Name;
+            _context.Customers.ToList()[index].IsMember = updateCust.IsMember;
+            _context.SaveChanges();
+        }
+
+        public void Delete(int index)
+        {
+            _context.Customers.ToList()[index].IsMember=false;
+            _context.SaveChanges();
         }
     }
 }

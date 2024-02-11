@@ -9,6 +9,9 @@ namespace Bgood.Service
 {
     public interface ICustomerRepository
     {
-        List<Customer> GetList();
+        IEnumerable<Customer> GetList();
+        void Add(Customer newCustomer);
+       void EditCustomer(int index, Customer updateCust);
+        public void Delete(int index);
     }
 }

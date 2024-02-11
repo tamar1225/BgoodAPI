@@ -15,10 +15,29 @@ namespace Bgood.Data.Repositories
         {
             _context = datacontext;
         }
-        public List<Product> GetList()
+        public IEnumerable<Product> GetList()
         {
-            return _context.Products;
+            return _context.Products.ToList();
         }
-        
+
+        public void Add(Product newProd) {
+            _context.Products.Add(newProd);
+            _context.SaveChanges();
+        }
+
+        public void UpdateProduct(int index, double newPrice)
+        {
+            _context.Products.ToList()[index].Price = newPrice;
+            _context.SaveChanges();
+        }
+
+        public void Delete(int index)
+        {
+            _context.Remove(_context.Products.ToList()[index]);
+            _context.SaveChanges();
+        }
+
+
+
     }
 }

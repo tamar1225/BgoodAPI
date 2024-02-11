@@ -10,6 +10,9 @@ namespace Bgood.Core.Services
     public interface IProductService
     {
         List<Product> GetAll();
-        Product GetProduct(int id);
+        Product GetByID(int prodId);
+        void AddProduct(Product newProd);
+        Product UpdateProduct(int prodId, double newPrice);
+        void DeleteProduct(int prodId);
     }
 }
