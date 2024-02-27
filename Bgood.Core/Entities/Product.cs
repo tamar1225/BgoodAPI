@@ -7,5 +7,7 @@
         public string ProductName { get; set; }
         public string Category { get; set; }
         public double Price { get; set; }
+        public List<Order> Orders { get; set; }
+
     }
 }

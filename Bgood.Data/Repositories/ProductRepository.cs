@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace Bgood.Data.Repositories
 {
@@ -17,7 +19,7 @@ namespace Bgood.Data.Repositories
         }
         public IEnumerable<Product> GetList()
         {
-            return _context.Products.ToList();
+            return _context.Products.Include(p=>p.Orders);
         }
 
         public void Add(Product newProd)

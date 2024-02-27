@@ -4,9 +4,15 @@ using Bgood.Core.Services;
 using Bgood.Data;
 using Bgood.Data.Repositories;
 using Bgood.Service;
-
+using System.Security.Cryptography.Xml;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllers().AddJsonOptions(option =>
+{
+    option.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    option.JsonSerializerOptions.WriteIndented = true;
+});
 
 // Add services to the container.
 

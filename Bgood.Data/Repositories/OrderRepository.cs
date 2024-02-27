@@ -1,5 +1,6 @@
 ﻿using Bgood.Core.Repositories;
 using BgoodAPI.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace Bgood.Data.Repositories
         }
         public IEnumerable<Order> GetList()
         {
-            return _datacontext.Orders.ToList();
+            return _datacontext.Orders.Include(o => o.products).Include(o => o.customer);
         }
         public void Add(Order order) 
         {

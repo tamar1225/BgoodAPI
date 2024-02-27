@@ -1,5 +1,6 @@
 ﻿using Bgood.Service;
 using BgoodAPI.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Bgood.Data.Repositories
         }
         public IEnumerable<Customer> GetList()
         {
-            return _context.Customers.ToList();
+            return _context.Customers.Include(c=>c.Orders);
         }
         public void Add(Customer newCustomer)
         {
