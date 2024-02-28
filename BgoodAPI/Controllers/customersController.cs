@@ -1,7 +1,10 @@
 ﻿using Bgood.Core.Services;
-using BgoodAPI.Entities;
+using Bgood.Core.Entities;
+using BgoodAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using AutoMapper;
+using Bgood.Core.DTOs;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,38 +15,45 @@ namespace BgoodAPI.Controllers
     public class customerController : ControllerBase
     {
         private readonly ICustomerService _customers;
-        public customerController(ICustomerService customerService)
+        private readonly IMapper _mapper;
+        public customerController(ICustomerService customerService, IMapper mapper)
         {
             _customers = customerService;
+            _mapper = mapper;
         }
 
         // GET: api/<prductsController>
         [HttpGet]
-        public IEnumerable<Customer> Get()
+        public IEnumerable<CustomerDTO> Get()
         {
-            return _customers.GetAll();
+            var list= _customers.GetAll();
+            var listDTO= _mapper.Map<IEnumerable<CustomerDTO>>(list);
+            return listDTO;
         }
 
        // GET api/<productsController>/5
         [HttpGet("{id}")]
-        public Customer Get(int ordNum)
+        public CustomerDTO Get(int ordNum)
         {
-            return _customers.GetByID(ordNum);
+            var customer= _customers.GetByID(ordNum);
+            return _mapper.Map<CustomerDTO>(customer);
 
         } 
 
         // POST api/<priductsController>
         [HttpPost]
-        public void Post([FromBody] Customer newCustomer)
+        public void Post([FromBody] CustomerPostModel newCustomer)
         {        
-            _customers.AddCustomer(newCustomer);
+            var customerToAdd = _mapper.Map<Customer>(newCustomer);
+            _customers.AddCustomer(customerToAdd);
         }
 
         // PUT api/<productsController>/5
         [HttpPut("{id}")]
-        public Customer Put(int id, [FromBody] Customer updateCust)
+        public Customer Put(int id, [FromBody] CustomerPostModel updateCust)
         {
-           return _customers.EditCustomer(id, updateCust);
+            var customerUpdate = new Customer() { Name = updateCust.Name, IsMember = updateCust.IsMember, Address = updateCust.Address };
+            return _customers.EditCustomer(id, customerUpdate);
 
         }
 

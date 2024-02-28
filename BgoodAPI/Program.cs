@@ -1,4 +1,5 @@
 
+using Bgood.Core;
 using Bgood.Core.Repositories;
 using Bgood.Core.Services;
 using Bgood.Data;
@@ -40,6 +41,9 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 builder.Services.AddDbContext<DataContext>(); //מקבלת מחלקה שיורשת את דיביקונטקסט
+
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.

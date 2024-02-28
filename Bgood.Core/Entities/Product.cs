@@ -1,4 +1,4 @@
-﻿namespace BgoodAPI.Entities
+﻿namespace Bgood.Core.Entities
 {
     public class Product
     {

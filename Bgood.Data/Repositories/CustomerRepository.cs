@@ -1,5 +1,5 @@
-﻿using Bgood.Service;
-using BgoodAPI.Entities;
+﻿using Bgood.Core.Entities;
+using Bgood.Service;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -39,5 +39,8 @@ namespace Bgood.Data.Repositories
             _context.Customers.ToList()[index].IsMember=false;
             _context.SaveChanges();
         }
+
+      
+       
     }
 }

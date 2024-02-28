@@ -1,6 +1,6 @@
 ﻿using Bgood.Core.Repositories;
 using Bgood.Core.Services;
-using BgoodAPI.Entities;
+using Bgood.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

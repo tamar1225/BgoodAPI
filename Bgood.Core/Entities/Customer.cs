@@ -1,4 +1,4 @@
-﻿namespace BgoodAPI.Entities
+﻿namespace Bgood.Core.Entities
 {
     public class Customer
     {
@@ -7,7 +7,6 @@
         public string Address { get; set; }
         public bool IsMember { get; set; }  
         public List<Order> Orders { get; set; }
-
 
 
     }

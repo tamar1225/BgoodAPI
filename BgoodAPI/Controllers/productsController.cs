@@ -1,8 +1,11 @@
 ﻿using Bgood.Core.Services;
 using Bgood.Service;
-using BgoodAPI.Entities;
+using Bgood.Core.Entities;
+using BgoodAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Bgood.Core.DTOs;
+using AutoMapper;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,36 +16,41 @@ namespace BgoodAPI.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
-
-        public ProductsController(IProductService productService)
+        private readonly IMapper _mapper;
+        public ProductsController(IProductService productService, IMapper mapper)
         {
             _productService = productService;
+            _mapper = mapper;
         }
 
         // GET: api/<prductsController>
         [HttpGet]
-        public IEnumerable<Product> Get()
+        public IEnumerable<ProductDTO> Get()
         {
-            return _productService.GetAll();
+            var list=_productService.GetAll();
+            return _mapper.Map<IEnumerable<ProductDTO>>(list);
         }
 
         // GET api/<productsController>/5
         [HttpGet("{id}")]
-        public Product Get(int id)
+        public ProductDTO Get(int id)
         {
-            return _productService.GetByID(id);
+            var product=_productService.GetByID(id);
+            return _mapper.Map<ProductDTO>(product);
+
         }
 
         // POST api/<priductsController>
         [HttpPost]
-        public void Post([FromBody] Product newProd)
+        public void Post([FromBody] ProductPostModel newProd)
         {
-            _productService.AddProduct(newProd);
+            var productToAdd=new Product() { Price=newProd.Price, Category=newProd.Category, ProductName=newProd.ProductName };
+            _productService.AddProduct(productToAdd);
         }
 
         // PUT api/<productsController>/5
         [HttpPut("{id}")]
-        public Product Put(int id, [FromBody] double newPrice)
+        public Product Put(int id, [FromBody] double newPrice)//  ??יש ענין לשנות
         {
             return _productService.UpdateProduct(id, newPrice);
 
