@@ -13,8 +13,8 @@ namespace Bgood.Core.Services
     {
         List<Order> GetAll();
         Order GetByID(int ordNum);
-        void AddOrder(Order newoOder);
-        Order UpdateOrder(int ordNum, string newStatus);
-        void DeleteOrder(int ordNum);
+        Task AddOrderAsync(Order newoOder);
+        Task<Order> UpdateOrderAsync(int ordNum, string newStatus);
+        Task DeleteOrderAsync(int ordNum);
     }
 }

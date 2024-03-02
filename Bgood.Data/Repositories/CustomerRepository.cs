@@ -19,25 +19,25 @@ namespace Bgood.Data.Repositories
         {
             return _context.Customers.Include(c=>c.Orders);
         }
-        public void Add(Customer newCustomer)
+        public async Task AddAsync(Customer newCustomer)
         {
             _context.Customers.Add(newCustomer);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
-        public void EditCustomer(int index, Customer updateCust)
+        public async Task EditCustomerAsync(int index, Customer updateCust)
         {
             //למה אי אפשר      :
             // _context.Customers.ToList()[index] = updateCust;  ????
             _context.Customers.ToList()[index].Address = updateCust.Address;
             _context.Customers.ToList()[index].Name = updateCust.Name;
             _context.Customers.ToList()[index].IsMember = updateCust.IsMember;
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
         }
 
-        public void Delete(int index)
+        public async Task DeleteAsync(int index)
         {
             _context.Customers.ToList()[index].IsMember=false;
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
         }
 
       

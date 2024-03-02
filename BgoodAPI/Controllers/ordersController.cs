@@ -43,7 +43,7 @@ namespace BgoodAPI.Controllers
 
         //POST api/<ordersController>
         [HttpPost]
-        public void Post([FromBody] OrderPostModel newOrder)
+        public async Task Post([FromBody] OrderPostModel newOrder)
         {
             var orderToAdd = new Order()
             {
@@ -53,22 +53,22 @@ namespace BgoodAPI.Controllers
                 orderDate = newOrder.orderDate,
                 orderNum = newOrder.orderNum
             };
-            _orders.AddOrder(orderToAdd);
+            await _orders.AddOrderAsync(orderToAdd);
         }
 
         // PUT api/<ordersController>/5
         [HttpPut("{ordNum}")]
-        public Order Put(int ordNum, [FromBody] string newStatus)
+        public async Task<Order> Put(int ordNum, [FromBody] string newStatus)
         {
 
-            return _orders.UpdateOrder(ordNum, newStatus);
+            return await _orders.UpdateOrderAsync(ordNum, newStatus);
         }
 
         // DELETE api/<ordersController>/5
         [HttpDelete("{ordNum}")]
-        public void Delete(int ordNum)
+        public async Task Delete(int ordNum)
         {
-            _orders.DeleteOrder(ordNum);
+          await  _orders.DeleteOrderAsync(ordNum);
         }
     }
 }

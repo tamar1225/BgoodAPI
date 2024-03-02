@@ -10,8 +10,8 @@ namespace Bgood.Core.Repositories
     public interface IOrderRepository
     {
         IEnumerable<Order> GetList();
-        void Add(Order order);
-        void UpdateOrder(int index, string newStatus);
-        void Delete(int index);
+        Task AddAsync(Order order);
+        Task UpdateOrderAsync(int index, string newStatus);
+        Task DeleteAsync(int index);
     }
 }

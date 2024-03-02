@@ -42,25 +42,25 @@ namespace BgoodAPI.Controllers
 
         // POST api/<priductsController>
         [HttpPost]
-        public void Post([FromBody] ProductPostModel newProd)
+        public async Task Post([FromBody] ProductPostModel newProd)
         {
             var productToAdd=new Product() { Price=newProd.Price, Category=newProd.Category, ProductName=newProd.ProductName };
-            _productService.AddProduct(productToAdd);
+           await _productService.AddProductAsync(productToAdd);
         }
 
         // PUT api/<productsController>/5
         [HttpPut("{id}")]
-        public Product Put(int id, [FromBody] double newPrice)//  ??יש ענין לשנות
+        public async Task<Product> Put(int id, [FromBody] double newPrice)//  ??יש ענין לשנות
         {
-            return _productService.UpdateProduct(id, newPrice);
+            return await _productService.UpdateProductAsync(id, newPrice);
 
         }
 
         // DELETE api/<productsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            _productService.DeleteProduct(id);
+           await _productService.DeleteProductAsync(id);
         }
 
     }

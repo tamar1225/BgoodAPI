@@ -42,26 +42,26 @@ namespace BgoodAPI.Controllers
 
         // POST api/<priductsController>
         [HttpPost]
-        public void Post([FromBody] CustomerPostModel newCustomer)
+        public async Task Post([FromBody] CustomerPostModel newCustomer)
         {        
             var customerToAdd = _mapper.Map<Customer>(newCustomer);
-            _customers.AddCustomer(customerToAdd);
+            await _customers.AddCustomerAsync(customerToAdd);
         }
 
         // PUT api/<productsController>/5
         [HttpPut("{id}")]
-        public Customer Put(int id, [FromBody] CustomerPostModel updateCust)
+        public async Task<Customer> Put(int id, [FromBody] CustomerPostModel updateCust)
         {
             var customerUpdate = new Customer() { Name = updateCust.Name, IsMember = updateCust.IsMember, Address = updateCust.Address };
-            return _customers.EditCustomer(id, customerUpdate);
+            return await _customers.EditCustomerAsync(id, customerUpdate);
 
         }
 
         // PUT api/<productsController>/5
         [HttpPut("{id}/status")]
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            _customers.DeleteCustomer(id);
+           await  _customers.DeleteCustomerAsync(id);
         }
     }
 }

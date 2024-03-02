@@ -29,25 +29,25 @@ namespace Bgood.Service
             Order order = GetAll().Find(o => o.orderNum == ordNum);
             return order;
         }
-        public void AddOrder(Order order) {
-            _orderRepository.Add(order);
+        public async Task AddOrderAsync(Order order) {
+            await _orderRepository.AddAsync(order);
         }
-        public Order UpdateOrder(int ordNum, string newStatus)
+        public async Task<Order> UpdateOrderAsync(int ordNum, string newStatus)
         {
             int index = GetAll().FindIndex((o) => o.orderNum == ordNum);
             if (index == -1)
             {       
                 return null;
             }
-             _orderRepository.UpdateOrder(index, newStatus);
+           await _orderRepository.UpdateOrderAsync(index, newStatus);
             return GetAll()[index];
         }
-        public void DeleteOrder(int ordNum)
+        public async Task DeleteOrderAsync(int ordNum)
         {
             int index = GetAll().FindIndex((o) => o.orderNum == ordNum);
             if (index != -1)
             {
-                _orderRepository.Delete(index);
+               await _orderRepository.DeleteAsync(index);
             }
         }
             

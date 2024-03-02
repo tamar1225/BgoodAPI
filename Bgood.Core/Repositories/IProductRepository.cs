@@ -11,9 +11,9 @@ namespace Bgood.Core.Repositories
     public interface IProductRepository
     {
         IEnumerable<Product> GetList();
-        public void Add(Product newProd);
-        public void UpdateProduct(int index, double newPrice);
-        public void Delete(int index);
+        public Task AddAsync(Product newProd);
+        public Task UpdateProductAsync(int index, double newPrice);
+        public Task DeleteAsync(int index);
 
     }
 }

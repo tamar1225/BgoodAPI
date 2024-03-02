@@ -28,26 +28,26 @@ namespace Bgood.Service
             return product;
         }
 
-        public void AddProduct(Product newProd)
+        public async Task AddProductAsync(Product newProd)
         {
-            _prodRepository.Add(newProd);
+            await _prodRepository.AddAsync(newProd);
         }
-        public Product UpdateProduct(int prodId, double newPrice)
+        public async Task<Product> UpdateProductAsync(int prodId, double newPrice)
         {
             int index = GetAll().FindIndex((p) => p.ProdID == prodId);
             if (index == -1)
             {
                 return null;
             }
-            _prodRepository.UpdateProduct(index, newPrice);
+            await _prodRepository.UpdateProductAsync(index, newPrice);
             return GetAll()[index];
         }
-        public void DeleteProduct(int prodId)
+        public async Task DeleteProductAsync(int prodId)
         {
             int index = GetAll().FindIndex((p) => p.ProdID == prodId);
             if (index != -1)
             {
-                _prodRepository.Delete(index);
+                await _prodRepository.DeleteAsync(index);
             }
         }
 

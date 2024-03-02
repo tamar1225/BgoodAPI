@@ -24,22 +24,22 @@ namespace Bgood.Data.Repositories
             return _context.Products.Include(p=>p.Orders);
         }
 
-        public void Add(Product newProd)
+        public async Task AddAsync(Product newProd)
         {
             _context.Products.Add(newProd);
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
         }
 
-        public void UpdateProduct(int index, double newPrice)
+        public async Task UpdateProductAsync(int index, double newPrice)
         {
             _context.Products.ToList()[index].Price = newPrice;
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
         }
 
-        public void Delete(int index)
+        public async Task DeleteAsync(int index)
         {
             _context.Remove(_context.Products.ToList()[index]);
-            _context.SaveChanges();
+          await  _context.SaveChangesAsync();
         }
 
     }

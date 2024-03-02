@@ -21,21 +21,21 @@ namespace Bgood.Data.Repositories
             //מחזיר ללא כל נתוני הלקוח, יהיה רק את הID שלו
             return _datacontext.Orders;//.Include(o => o.products).Include(o => o.customer);
         }
-        public void Add(Order order) 
+        public async Task AddAsync(Order order) 
         {
          _datacontext.Orders.Add(order);
-         _datacontext.SaveChanges();
+         await _datacontext.SaveChangesAsync();
         }
-        public void UpdateOrder(int index, String newStatus) 
+        public async Task UpdateOrderAsync(int index, String newStatus) 
         {
             _datacontext.Orders.ToList()[index].status = newStatus;
-            _datacontext.SaveChanges();
+           await _datacontext.SaveChangesAsync();
         }
-        public void Delete(int index) 
+        public async Task DeleteAsync(int index) 
         {
             _datacontext.Remove(_datacontext.Orders.ToList()[index]);
             //_datacontext.Orders.ToList().RemoveAt(index);
-            _datacontext.SaveChanges();
+           await _datacontext.SaveChangesAsync();
         }
     }
 }

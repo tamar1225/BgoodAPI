@@ -11,9 +11,9 @@ namespace Bgood.Core.Services
     {
         List<Customer> GetAll();
         Customer GetByID(int id);
-        void AddCustomer(Customer newCust);
-        Customer EditCustomer(int id, Customer updateCust);
-        public void DeleteCustomer(int custID);
+        Task AddCustomerAsync(Customer newCust);
+        Task<Customer> EditCustomerAsync(int id, Customer updateCust);
+        public Task DeleteCustomerAsync(int custID);
 
     }
 }

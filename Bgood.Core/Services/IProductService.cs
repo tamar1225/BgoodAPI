@@ -11,8 +11,8 @@ namespace Bgood.Core.Services
     {
         List<Product> GetAll();
         Product GetByID(int prodId);
-        void AddProduct(Product newProd);
-        Product UpdateProduct(int prodId, double newPrice);
-        void DeleteProduct(int prodId);
+        Task AddProductAsync(Product newProd);
+        Task<Product> UpdateProductAsync(int prodId, double newPrice);
+        Task DeleteProductAsync(int prodId);
     }
 }

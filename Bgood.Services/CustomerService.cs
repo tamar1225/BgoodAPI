@@ -26,18 +26,18 @@ namespace Bgood.Service
             Customer customer = _customerRepository.GetList().ToList().Find(c => c.Id == id);
             return customer;
         }
-        public void AddCustomer(Customer newCust)
+        public async Task AddCustomerAsync(Customer newCust)
         {
             int index = GetAll().FindIndex((c) => c.Id == newCust.Id);
             if (index == -1)
             {
                 newCust.IsMember = false;
-                _customerRepository.Add(newCust);
+               await _customerRepository.AddAsync(newCust);
             }
             Console.WriteLine("customer is already exists");
         }
 
-        public Customer EditCustomer(int id, Customer updateCust)
+        public async Task<Customer> EditCustomerAsync(int id, Customer updateCust)
         {
             updateCust.Id=id;
             int index = GetAll().FindIndex((c) => c.Id == updateCust.Id);
@@ -45,15 +45,15 @@ namespace Bgood.Service
             {
                 return null;
             }
-            _customerRepository.EditCustomer(index, updateCust);
+            await _customerRepository.EditCustomerAsync(index, updateCust);
             return GetAll()[index];
         }
-        public void DeleteCustomer(int custID)
+        public async Task DeleteCustomerAsync(int custID)
         {
             int index = GetAll().FindIndex((c) => c.Id == custID);
             if (index != -1)
             {
-                _customerRepository.Delete(index);
+              await  _customerRepository.DeleteAsync(index);
             }
         }
     }
