@@ -5,6 +5,7 @@ using Bgood.Core.Services;
 using Bgood.Data;
 using Bgood.Data.Repositories;
 using Bgood.Service;
+using BgoodAPI.Middlewares;
 using System.Security.Cryptography.Xml;
 using System.Text.Json.Serialization;
 
@@ -57,6 +58,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 app.UseCors(policy);
+
+app.UseMiddleware<ShabbatMiddleware>();
 
 app.MapControllers();
 
